@@ -1,0 +1,56 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom CSS */
+.customZoom{
+    transition: transform .2s; /* Animation */
+}
+.customZoom:hover{
+    transform: scale(1.1); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+
+.goRight{
+    transition: transform .7s;
+}
+.goRight:hover{
+  transform: translate(20px)
+}
+
+#link_offerta{
+    display: flex;
+    align-items: center;
+    font-size:17px;
+    color:#2e2e33 0.3;
+    margin: 0 auto;
+    
+    
+}
+
+.table_daysofceos{
+    text-align: center;
+}
+
+.table_daysofceos th{
+    border-left:1px solid #2e2e33;
+    border-right: 1px solid #2e2e33;
+    background-color: #54545A;
+    color: white;
+    padding:10px;
+    font-weight: 700;
+}
+
+.table_daysofceos tr{
+    border-bottom: 1px solid #2e2e33;
+    border-top: 1px solid #2e2e33;
+}
+
+
+.table_daysofceos td{
+    border-left:1px solid #2e2e33;
+    border-right: 1px solid #2e2e33;
+}
+
+#img_download{
+    width:100%;
+}
