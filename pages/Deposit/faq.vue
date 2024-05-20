@@ -13,7 +13,7 @@
           <h3 class="text-lg font-medium">
             {{item.title}}
           </h3>
-          <svg :fill="item.isShow ? '#111827' : 'none'" :stroke="item.isShow ? 'none' : '#111827'" width="24" height="24" class="cursor-pointer"
+          <svg :fill="item.isShow ? '#111827' : 'none'" :stroke="item.isShow ? 'none' : '#111827'" width="24" height="24" class="cursor-pointer min-w-[24px] min-h-[24px]"
           @click="openList(item)">
             <use :xlink:href="item.isShow ? '#cross' : '#plus'"></use>
           </svg>
