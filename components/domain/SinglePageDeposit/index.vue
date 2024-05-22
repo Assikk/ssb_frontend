@@ -14,7 +14,7 @@
       <!-- Start block Calculator -->
         <!-- Start title Calculator -->
         <Titles class="text-left sm:text-center">
-          Даромад аз пасандози Шумо
+          {{$t('deposit.calculator.title')}}
         </Titles>
         <!-- End title Calculator -->
       </div>

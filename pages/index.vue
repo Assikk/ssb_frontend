@@ -39,6 +39,14 @@
             {{$t('currency.title')}}
           </Titles>
           <Currency class="mt-4"/>
+
+          <!-- Начало блока курса золота -->
+          <div class="grid grid-cols-1 sm:grid-cols-2 items-center gap-4 mt-4 sm:mt-10">
+            <Gold v-intersection-observer="{ handler: get_gold, once: true }"/>
+            <img src="/image/gold.png" alt="">
+          </div>
+          <!-- Конец блока курса золота -->
+
         </div>
         <div class="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 my-20">
           <CardLink v-for="link in $t('pages.main.links').slice(0,3)" :key="link.id" :link="link" type="deafult"/>
@@ -51,39 +59,49 @@
             <CardNews v-for="item in news.slice(0,3)" :key="item.id" :item="item" type="deafult"/>
           </div>
         </div>
+
+        <!-- Начало блока дней приема -->
         <div>
-          <h1 style="font-size: 32px;color: #2e2e33;font-weight: 700;padding-bottom: 30px;">Рӯзҳои қабули мизоҷон</h1>
-            <table class="table_daysofceos" style="border:1px solid #b3b6bc;border-radius:20px;width:100%">
-              <tr>
-                <th>№</th>
-                <th>Ному насаб</th>
-                <th>Мансаб</th>
-                <th>Рӯзи қабул</th>
-                <th>Вақти қабул</th>
+          <h1 class="font-semibold text-2xl-1 sm:text-3xl-1 mb-10">
+            {{$t('reception.title')}}
+          </h1>
+          <Table :head="$t('reception.table.head')">
+            <template #body>
+              <tr v-for="item in $t('reception.table.body')" :key="item.id">
+                <td>
+                  <span>
+                    {{item.id}}
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    {{item?.name}} {{item?.surname}} {{item?.patronymic}}
+                  </span>
+                </td>
+                <td>
+                  <span>
+                    {{item.post}}
+                  </span>
+                </td>
+                <td>
+                  <div class="flex justify-center gap-2">
+                    <span v-for="(day, index) in item.reception.days" :key="index">
+                      {{day}}
+                    </span>
+                  </div>
+                </td>
+                <td>
+                  <div class="flex flex-col gap-2">
+                    <span v-for="(time, index) in item.reception.time" :key="index">
+                      {{time}}
+                    </span>
+                  </div>
+                </td>
               </tr>
-              <tr>
-                <td>1</td>
-                <td>Бобозода Ҳоқимшоҳ Ҷурахон</td>
-                <td>Раиси Раёсат</td>
-                <td>Чоршанбе <br> Шанбе</td>
-                <td>09:00-11:00<br> 09:00-11:00</td>
-              </tr>
-              <tr>
-                <td>2</td>
-                <td>Ғарибшозода Азизшо Қиматшо</td>
-                <td>Муовини якуми Раиси Раёсат</td>
-                <td>Сешанбе <br> Панҷшанбе</td>
-                <td>09:00-11:00<br> 15:00-17:00</td>
-              </tr>
-              <tr>
-                <td>3</td>
-                <td>Муҳиддинзода Шуҳрат Фаридун</td>
-                <td>Муовини Раиси Раёсат</td>
-                <td>Душанбе <br> Ҷумъа</td>
-                <td>15:00-17:00<br> 09:00-11:00</td>
-              </tr>
-            </table>
+            </template>
+          </Table>
         </div>
+        <!-- Конец блока дней приема -->
 
         <div class="my-20">
           <Titles>
@@ -128,11 +146,16 @@
 
 <script>
 import {mapState, mapActions,mapMutations} from 'vuex'
+import Gold from '@/components/gold.vue'
+import Table from '@/components/table.vue'
 export default {
   name: 'IndexPage',
+  components: {
+    Gold,
+    Table
+  },
   data() {
     return {
-      filtered:[],
       social: [
         {
           id: 1,
@@ -219,7 +242,7 @@ export default {
       sliders: state => state.api.sliders,
       news: state => state.api.news,
       applications: state => state.api.applications,
-      vacancies: state => state.vacancy.vacancies
+      vacancies: state => state.vacancy.vacancies,
     })
   },
   methods: {
@@ -231,7 +254,8 @@ export default {
     }),
     ...mapActions({
       get_page: 'api/get_page',
-      get_vacancies: 'vacancy/get_vacancies'
+      get_vacancies: 'vacancy/get_vacancies',
+      get_gold: 'gold/get_gold'
     }),
     async get_sliders() {
       try {
@@ -305,10 +329,6 @@ export default {
 
       })
     },
-    async get_gold() {
-      let res = await this.$axios.get('currency-gold')
-      console.log(res.data);
-    },
     openApplication(application) {
       if(application.id == 7) {
         let payload = {
@@ -325,9 +345,6 @@ export default {
     await this.get_news()
     await this.get_applications()
     await this.get_recommandeds()
-    // await this.get_gold()
   },
-
-
  }
 </script>

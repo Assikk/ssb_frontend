@@ -1,10 +1,14 @@
 import vacancy from './en/vacancy'
 import credit from './en/credit'
 import deposit from './en/deposit'
+import gold from './en/gold'
+import reception from './en/reception'
 export default {
   vacancy: vacancy,
   credit: credit,
   deposit: deposit,
+  gold: gold,
+  reception: reception,
   advtg:'ADVANTAGES',
   msn:'MISSION',
   msn_text:"The Bank's mission is to implement state policy in the direction of financial support for the development of production potential, promoting the export of industrial goods and the production of import-substituting products in the republic, as well as the dreams, goals and requirements of our clients form the basis of our activities.",

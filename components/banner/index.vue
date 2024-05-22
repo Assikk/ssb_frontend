@@ -5,9 +5,7 @@
         <h1 class="font-semibold text-2xl-1 sm:text-3xl-1 mb-3">
           <span v-html="banner.title"></span>
         </h1>
-        <p class="text-base">
-          {{banner.description}}
-        </p>
+        <div v-html="banner.description"/>
         <div class="flex justify-center md:justify-start items-center gap-6">
           <Button v-if="type === 'openApplication'" :primary="true" class="!w-fit mt-8"
           @click="openApplication">

@@ -21,7 +21,7 @@
         {{$t('credit.calculator.title')}}
       </Titles>
       <CalculatorCard class="mt-10 mb-20 hidden" :card="credit"/>
-      <CalculatorCredit class="my-4 sm:my-10"/>
+      <CalculatorCredit class="my-4 sm:my-10" :container_id="credit.container_id"/>
       <!-- End block Calculator -->
     </div>
 
@@ -218,7 +218,7 @@ export default {
         credit_amount: '',
         credit_period: ''
       },
-      disabledSend: false
+      disabledSend: false,
     }
   },
   validations: {

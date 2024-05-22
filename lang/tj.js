@@ -1,10 +1,14 @@
 import vacancy from './tj/vacancy'
 import credit from './tj/credit'
 import deposit from './tj/deposit'
+import gold from './tj/gold'
+import reception from './tj/reception'
 export default {
   vacancy: vacancy,
   credit: credit,
   deposit: deposit,
+  gold: gold,
+  reception: reception,
   advtg:'БАРТАРИЯТ',
   msn:'РИСОЛАТ',
   msn_text:'Рисолати Бонк - татбиқи сиёсати давлатӣ дар самти дастгирии молиявӣ барои рушди иқтидори истеҳсолӣ, мусоидат намудан ба содироти молу маҳсулоти саноатӣ ва истеҳсоли маҳсулотҳои воридотивазкунанда дар ҷумҳурӣ буда, орзу, ҳадаф ва талаботҳои муштариёни мо асоси фаъолияти моро ташкил медиҳад.',

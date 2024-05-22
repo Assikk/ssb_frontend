@@ -1,17 +1,22 @@
 <template>
   <section>
-    <DomainSinglePageCredit/>
+    <DomainSinglePageCredit v-if="!isLoading"/>
   </section>
 </template>
 <script>
 import {mapActions} from 'vuex'
 export default {
   name: 'SinglePageCredit',
+  data() {
+    return {
+      isLoading: true
+    }
+  },
   methods: {
     ...mapActions({
       get_page: 'api/get_page'
     }),
-    get_credit() {
+    async get_credit() {
       let payload = {
         request: `Credit/${this.$route.params.slug}/`,
         key: 'singlePage',
@@ -20,8 +25,9 @@ export default {
       this.get_page(payload)
     }
   },
-  mounted() {
-    this.get_credit()
+  async mounted() {
+    await this.get_credit()
+    this.isLoading = false
   }
 }
 </script>

@@ -4,9 +4,7 @@
       <h1 class="font-semibold text-2xl-1 mb-2 truncate">
         {{product.title}}
       </h1>
-      <p class="text-black text-base-1 description">
-        {{product.description}}
-      </p>
+      <div class="description" v-html="product.description"/>
     </div>
     <div class="flex flex-col gap-6 h-36">
       <div>

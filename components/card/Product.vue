@@ -31,9 +31,7 @@
       <h2 class="font-semibold text-xl-1 sm:text-2xl-1 mb-2">
         {{ card.title }}
       </h2>
-      <p class="text-sm-1 sm:text-base text-black mb-6">
-        {{ card.description }}
-      </p>
+      <div v-html="card.description"/>
       <div
         class="flex justify-between lg:justify-start flex-col md:flex-row gap-4 mb-6"
       >

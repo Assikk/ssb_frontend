@@ -5,7 +5,7 @@
       <div class="w-full lg:w-3/5 flex flex-col gap-8">
         <div>
           <div class="flex items-center justify-between gap-4">
-            <TextsBase-1BlackSSB> Хароҷоти моҳона  </TextsBase-1BlackSSB>
+            <TextsBase-1BlackSSB> {{$t('deposit.calculator.amount_month')}}  </TextsBase-1BlackSSB>
             <div class="flex items-center gap-2 bg-white px-2 rounded-lg">
               <input type="number" v-model="activeAmount"
               class="py-3 px-5 text-black rounded-lg w-[100px] outline-0">
@@ -38,14 +38,14 @@
         </div>
         <div>
           <div class="flex items-center justify-between gap-4">
-            <TextsBase-1BlackSSB> Мӯҳлати пасандоз  </TextsBase-1BlackSSB>
+            <TextsBase-1BlackSSB> {{$t('deposit.calculator.period')}}  </TextsBase-1BlackSSB>
             <div class="flex items-center gap-2 bg-white px-2 rounded-lg">
               <input
               type="number"
               v-model="activeTerm"
               class="py-3 px-5 text-black rounded-lg w-[100px] outline-0">
               <p>
-                месяц
+                {{$t('deposit.calculator.month')}}
               </p>
             </div>
           </div>
@@ -75,40 +75,45 @@
         </div>
       </div>
       <div class="w-full md:w-2/5 flex flex-col gap-5">
+      <div class="flex gap-4 justify-between items-center">
         <TitlesXl2-1BlackSSB>
-          Натиҷа
+          {{$t('deposit.calculator.result')}}
         </TitlesXl2-1BlackSSB>
+        <Button :primary="true" @click="showSheduleDeposit">
+          {{$t('deposit.calculator.schedule')}}
+        </Button>
+      </div>
         <div class="flex items-center justify-between">
           <TextsBase1Gray>
-            Ҷамъи маблағ
+            {{$t('deposit.calculator.total_amount')}}
           </TextsBase1Gray>
           <TitlesXl2-1Primary>
-            {{test}} сомони
+            {{test}} {{$t('deposit.calculator.somoni')}}
           </TitlesXl2-1Primary>
         </div>
         <div class="flex items-center justify-between">
           <TextsBase1Gray>
-            Даромад аз пасандоз
+            {{$t('deposit.calculator.income')}}
           </TextsBase1Gray>
           <TextsXl-1BlackSSB>
-            + {{test - activeAmount}} сомони
+            + {{test - activeAmount}} {{$t('deposit.calculator.somoni')}}
           </TextsXl-1BlackSSB>
         </div>
         <div class="flex items-center justify-between">
           <TextsBase1Gray>
-            Меъёр
+            {{$t('deposit.calculator.percent')}}
           </TextsBase1Gray>
           <TextsXl-1BlackSSB>
             {{deposit.annual_rate_subtitle}}
           </TextsXl-1BlackSSB>
         </div>
         <Button :primary="true" class="!w-full" @click="openApplication(true)">
-          Дархост фиристодан
+          {{$t('deposit.calculator.send')}}
         </Button>
       </div>
     </div>
     <TextsBase-1Gray class="mt-8">
-      Натиҷаи ҳисобкунак тахминӣ буда, дастраси омма нест
+      {{$t('deposit.calculator.warning')}}
     </TextsBase-1Gray>
   </div>
   <transition name="fade">
@@ -166,7 +171,11 @@ export default {
 
     ...mapMutations({
       openApplication: "application/changeApplication",
-      change_state: 'application/change_state'
+      change_state: 'application/change_state',
+      show_sheduleDeposit: 'deposit/SHOW_SHEDULEDEPOSIT',
+      set_deposit: 'deposit/SET_DEPOSIT',
+      set_amount: 'deposit/SET_AMOUNT',
+      set_period: 'deposit/SET_PERIOD'
     }),
     change(item) {
       this.activeCredit = item;
@@ -324,6 +333,12 @@ export default {
       this.activeAmount = 0
       this.activeTerm = 0
       this.clearRangeInput()
+    },
+    showSheduleDeposit() {
+      this.set_deposit(this.deposit)
+      this.set_amount(this.activeAmount)
+      this.set_period(this.activeTerm)
+      this.show_sheduleDeposit(true)
     }
   },
   watch: {

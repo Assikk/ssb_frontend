@@ -154,6 +154,11 @@ export default {
   components: {
     Aplication
   },
+  props: {
+    container_id: {
+      type: Number
+    }
+  },
   data() {
     return {
       min_term: 2,
@@ -203,10 +208,11 @@ export default {
         body: [],
       };
       await this.get_page(payload);
-      // let credits = this.credits.filter((item) => {
-      //   return item.container_id == this.credit.container_id
-      // })
-      this.activeCredit = JSON.parse(JSON.stringify(this.credits))[0];
+      if(this.container_id) {
+        this.activeCredit = this.credits.filter((item) => {
+          return item.container_id == this.container_id
+        })[0]
+      } else this.activeCredit = JSON.parse(JSON.stringify(this.credits))[0];
     },
     adjustRangeSliderColor() {
       var target = document.getElementById(this.$refs.rangeType.id);
