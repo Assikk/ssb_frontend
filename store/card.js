@@ -1,31 +1,19 @@
 export const state = () => ({
-  deposits: [],
-  isShowSheduleDeposit: false,
-  deposit: {},
-  amount: 0,
-  period: 0
+  cards: [],
+  card: {},
 })
 export const mutations = {
-  SHOW_SHEDULEDEPOSIT(state, payload) {
-    state.isShowSheduleDeposit = payload
+  SET_CARDS(state, payload) {
+    state.cards = payload
   },
-  SET_DEPOSITS(state, payload) {
-    state.deposits = payload
+  SET_CARD(state, payload) {
+    state.card = payload
   },
-  SET_DEPOSIT(state, payload) {
-    state.deposit = payload
-  },
-  SET_AMOUNT(state, payload) {
-    state.amount = payload
-  },
-  SET_PERIOD(state, payload) {
-    state.period = payload
-  }
 }
 export const actions = {
-  async get_deposits({commit}, language_id) {
-    commit('SET_DEPOSITS', [])
-    let res = await this.$axios.get(`Deposit/?language_id=${language_id}`)
+  async get_cards({commit}, search) {
+    commit('SET_CARDS', [])
+    let res = await this.$axios.get(`Card/?${this.$convertedSearch(search)}`)
     res.data.results.forEach((item) => {
       const infoTagStart = item.description.indexOf('&lt;info&gt')
       let splitContent = []
@@ -40,11 +28,11 @@ export const actions = {
         console.error('Тег <info> не найден в содержимом.');
       }
     })
-    commit('SET_DEPOSITS', res.data.results)
+    commit('SET_CARDS', res.data.results)
   },
-  async get_deposit({commit}, id) {
-    commit('SET_DEPOSIT', {})
-    let res = await this.$axios.get(`Deposit/${id}/`)
+  async get_card({commit}, id) {
+    commit('SET_CARD', {})
+    let res = await this.$axios.get(`Card/${id}/`)
     const infoTagStart = res.data.description.indexOf('&lt;info&gt')
     let splitContent = []
     if (infoTagStart !== -1) {
@@ -57,6 +45,6 @@ export const actions = {
     } else {
       console.error('Тег <info> не найден в содержимом.');
     }
-    commit('SET_DEPOSIT', res.data)
+    commit('SET_CARD', res.data)
   }
 }

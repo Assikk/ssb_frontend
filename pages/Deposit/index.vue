@@ -42,7 +42,7 @@ export default {
   },
   computed: {
     ...mapState({
-      deposits: state => state.api.page,
+      deposits: state => state.deposit.deposits,
       language_id: state => state.language.language_id,
       isApplicationDeposit: state => state.application.isApplicationDeposit
     })
@@ -52,16 +52,8 @@ export default {
       change_state: 'application/change_state'
     }),
     ...mapActions({
-      get_page: 'api/get_page',
+      get_deposits: 'deposit/get_deposits'
     }),
-    get_deposits() {
-      let payload = {
-        request: `Deposit/?language_id=${this.language_id}`,
-        key: 'page',
-        body: []
-      }
-      this.get_page(payload)
-    },
     openApplicationDeposit(deposit) {
       this.deposit = deposit
       let payload = {
@@ -71,8 +63,8 @@ export default {
       this.change_state(payload)
     }
   },
-  mounted() {
-    this.get_deposits()
+  async mounted() {
+    await this.get_deposits(this.language_id)
   }
 }
 </script>

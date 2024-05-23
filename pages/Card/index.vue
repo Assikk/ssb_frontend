@@ -1,5 +1,5 @@
 <template>
-  <section class="main__container px-6 xl:px-0">
+  <section v-if="!isLoading" class="main__container px-6 xl:px-0">
     <Titles class="my-6">
       {{ $t('cards') }}
     </Titles>
@@ -41,14 +41,15 @@ export default {
   },
   computed: {
     ...mapState({
-      cards: state => state.api.cards,
+      cards: state => state.card.cards,
       language_id: state => state.language.language_id,
       isApplicationCard: state => state.application.isApplicationCard
     })
   },
   data() {
     return {
-      card: {}
+      card: {},
+      isLoading: true
     }
   },
   methods: {
@@ -56,16 +57,9 @@ export default {
       change_state: 'application/change_state'
     }),
     ...mapActions({
-      get_page: 'api/get_page'
+      get_page: 'api/get_page',
+      get_cards: 'card/get_cards'
     }),
-    get_cards() {
-      let payload = {
-        request: `Card/?language_id=${this.language_id}`,
-        key: 'cards',
-        body: []
-      }
-      this.get_page(payload)
-    },
     openApplicationCard(card) {
       this.card = card
       let payload = {
@@ -76,7 +70,8 @@ export default {
     }
   },
   async mounted() {
-    this.get_cards()
+    await this.get_cards({language_id: this.language_id})
+    this.isLoading = false
   }
 }
 </script>
