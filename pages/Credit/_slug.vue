@@ -218,7 +218,8 @@ export default {
         type: 'credit',
         credit_purpose: '',
         credit_amount: '',
-        credit_period: ''
+        credit_period: '',
+        credit_type: 'VISA'
       },
       disabledSend: false,
       isLoading: true
@@ -259,6 +260,7 @@ export default {
       this.change_state(payload)
     },
     async sendApplication() {
+      this.form.nameProduct = this.credit.title
       let formData = new FormData()
       for(let i in this.form) {
         formData.append(i, this.form[i])
@@ -267,7 +269,6 @@ export default {
         this.$v.$touch()
         return
       }
-      this.form.nameProduct = this.credit.title
       if(!this.disabledSend) {
         this.disabledSend = true
         this.loading_alert()
@@ -287,6 +288,7 @@ export default {
             credit_amount: '',
             credit_period: '',
             credit_purpose: '',
+            credit_type: 'VISA'
           }
         } catch(err) {
           this.disabledSend = false

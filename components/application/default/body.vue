@@ -167,6 +167,7 @@ export default {
         name: null,
         patronymic: null,
         phone: null,
+        card_type: 'VISA'
       },
       regions: [
         {
@@ -255,7 +256,7 @@ export default {
       formdata.append("nameProduct", this.active.title ? this.active.title : this.active.name);
       if(!this.disabledSave) {
         this.disabledSave = true
-        await this.$axios.post("https://webapi.ssb.tj/sendEmailContent/",formdata);
+        await this.$axios.post("https://webapi.ssb.tj/sendEmailContent/", formdata);
         // await this.$axios.post("http://127.0.0.1:8000/sendEmailContent",formdata);
         this.changeApplication(false), this.changeSuccess(true);
       }

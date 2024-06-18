@@ -145,6 +145,7 @@ export default {
         file2: "",
         type: "card",
         card_expire_date: "",
+        card_type: 'VISA'
       },
       regions: [
         {

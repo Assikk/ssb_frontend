@@ -57,7 +57,32 @@ export default {
       if(this.duration > 12) {
         return 365
       } else return 360
-    }
+    },
+    percent() {
+      if(this.$route.params.slug == 6) {
+        if(this.duration <= 12) {
+          return 7
+        } else return 8
+      }
+      if(this.$route.params.slug == 7) {
+        if(this.duration <= 6) {
+          return 1
+        } else if(this.duration <= 9) {
+          return 3
+        } else if(this.duration <= 12) {
+          return 7
+        } else return 8
+      }
+      if(this.$route.params.slug == 9) {
+        if(this.duration <= 6) {
+          return 0
+        } else if(this.duration <= 9) {
+          return 1
+        } else if(this.duration <= 12) {
+          return 1.5
+        } else return 4
+      }
+    },
   },
   data() {
     return {
@@ -69,7 +94,8 @@ export default {
       show_sheduleDeposit: 'deposit/SHOW_SHEDULEDEPOSIT'
     }),
     countFormula(days) {
-      return Math.round((parseFloat(((Math.round(this.amount * (this.deposit.tjs_min_percent / 100))) / this.year).toFixed(2))) * days)
+      // return Math.round((parseFloat(((Math.round(this.amount * (this.deposit.tjs_min_percent / 100))) / this.year).toFixed(2))) * days)
+      return Math.round((parseFloat(((Math.round(this.amount * (this.percent / 100))) / this.year).toFixed(2))) * days)
     },
     init() {
       for (let i = 0; i < this.duration; i++) {

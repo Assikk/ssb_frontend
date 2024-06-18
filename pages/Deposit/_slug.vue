@@ -311,6 +311,7 @@ export default {
       this.change_state(payload)
     },
     async sendApplication() {
+      this.form.nameProduct = this.deposit.title
       let formData = new FormData()
       for(let i in this.form) {
         formData.append(i, this.form[i])
@@ -319,7 +320,6 @@ export default {
         this.$v.$touch()
         return
       }
-      this.form.nameProduct = this.deposit.title
       if(!this.disabledSend) {
         this.disabledSend = true
         this.loading_alert()
@@ -335,7 +335,8 @@ export default {
             file2: '',
             file3: '',
             phone: '',
-            type: 'deposit'
+            type: 'deposit',
+            deposit_type: 'default'
           }
         } catch(err) {
           this.disabledSend = false
